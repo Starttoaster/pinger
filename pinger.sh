@@ -65,6 +65,6 @@ while true; do
 
 	clear
 	for ((i=0; i<${#hosts[@]}; i++)); do
-		printf '%-20s: %-20s: %s\n' "${hosts[i]}" "${results[i]}" "${timer[i]}"
+		printf '%-15s: %-15s %s\n' "${hosts[i]}" "${results[i]}" "${timer[i]}"
 	done
 done
