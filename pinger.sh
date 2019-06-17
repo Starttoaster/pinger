@@ -5,12 +5,11 @@
 #
 shopt -s lastpipe
 BATCH="$(cat $1)"
-RED=$(tput setaf 1) 
-GREEN=$(tput setaf 2) 
-NC=$(tput sgr0) 
-online="${GREEN}ONLINE$NC" 
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+NC=$(tput sgr0)
+online="${GREEN}ONLINE$NC"
 offline="${RED}OFFLINE$NC"
-
 
 #
 # Functions
@@ -26,7 +25,7 @@ function pingIt {
         else
                 results+=( "$offline" )
 		if [ "${timeout["$counter"]}" = "" ]; then
-			timeout["$counter"]="$(date +"%T")"	
+			timeout["$counter"]="$(date +"%T")"
 		fi
 	fi
 }
@@ -49,7 +48,7 @@ function downtime {
 #
 
 echo "$BATCH" | while read -r host; do
-	if [ ! -z "$host" ]; then	
+	if [ ! -z "$host" ]; then
 		addNewHost
 	fi
 done
@@ -62,8 +61,8 @@ while true; do
 		((counter++))
 	done
 	downtime
-
 	clear
+	printf '%-15s: %-8s %s\n' "Hostname" "Status" "Timer"
 	for ((i=0; i<${#hosts[@]}; i++)); do
 		printf '%-15s: %-15s %s\n' "${hosts[i]}" "${results[i]}" "${timer[i]}"
 	done
